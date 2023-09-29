@@ -27,7 +27,9 @@ export function App({signOut, user} : WithAuthenticatorProps) {
   ============*/
 
   const [playing, setPlaying] = useState<boolean>(false)
+  const [modelsLoaded, setModelsLoaded] = useState<boolean>(false)
   const [currentInterval, setCurrentInterval] = useState<NodeJS.Timer>()
+
 
   const videoRef = useRef<HTMLVideoElement>(null)
   const canvasRef = useRef<HTMLCanvasElement>(null)
@@ -48,11 +50,17 @@ export function App({signOut, user} : WithAuthenticatorProps) {
       faceApi.nets.faceExpressionNet.loadFromUri("/models"),
       faceApi.nets.ageGenderNet.loadFromUri("/models"),
     ]).then(()=>{
+      setModelsLoaded(true)
       console.log('models loaded')
-    })
+    }).catch((err : string) => {console.error(err)})
   }
 
   const startVideo = () => {
+
+    if (!modelsLoaded) {
+      console.warn('cannot start, models not loaded')
+      return
+    }
 
     navigator.mediaDevices.getUserMedia({
       video: {
@@ -69,9 +77,7 @@ export function App({signOut, user} : WithAuthenticatorProps) {
       setCurrentInterval(setInterval(detect, INTERVAL_TIME))
       setPlaying(true)
     })
-    .catch((err) => {
-      console.error(err)
-    })
+    .catch((err : string) => {console.error(err)})
 
   }
 
