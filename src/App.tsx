@@ -43,18 +43,19 @@ export function App({signOut, user} : WithAuthenticatorProps) {
   },[])
 
   const loadModels = async ()=>{
+    const MODEL_URL = `/models`
     console.log('loading models')
 
     console.log('loading tinyFaceDetector...')
-    await faceApi.nets.tinyFaceDetector.loadFromUri("/models").catch((err)=>{console.error(err)})
+    await faceApi.nets.tinyFaceDetector.loadFromUri(MODEL_URL).catch((err)=>{console.error(err)})
     console.log('loading faceLandmark68Net...')
-    await faceApi.nets.faceLandmark68Net.loadFromUri("/models").catch((err)=>{console.error(err)})
+    await faceApi.nets.faceLandmark68Net.loadFromUri(MODEL_URL).catch((err)=>{console.error(err)})
     console.log('loading faceRecognitionNet...')
-    await faceApi.nets.faceRecognitionNet.loadFromUri("/models").catch((err)=>{console.error(err)})
+    await faceApi.nets.faceRecognitionNet.loadFromUri(MODEL_URL).catch((err)=>{console.error(err)})
     console.log('loading faceExpressionNet...')
-    await faceApi.nets.faceExpressionNet.loadFromUri("/models").catch((err)=>{console.error(err)})
+    await faceApi.nets.faceExpressionNet.loadFromUri(MODEL_URL).catch((err)=>{console.error(err)})
     console.log('loading ageGenderNet...')
-    await faceApi.nets.ageGenderNet.loadFromUri("/models").catch((err)=>{console.error(err)})
+    await faceApi.nets.ageGenderNet.loadFromUri(MODEL_URL).catch((err)=>{console.error(err)})
     setModelsLoaded(true)
     console.log('models loaded')
   }
