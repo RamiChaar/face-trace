@@ -54,26 +54,25 @@ export function App({signOut, user} : WithAuthenticatorProps) {
         faceApi.loadFaceExpressionModel(MODEL_URL)
       ])
   }
-  await initModels();
 
     console.log('loading tinyFaceDetector...')
     // await faceApi.nets.tinyFaceDetector.loadFromUri(MODEL_URL).catch((err)=>{console.error(err)})
-    faceApi.loadTinyFaceDetectorModel(MODEL_URL)
+    await faceApi.loadTinyFaceDetectorModel(MODEL_URL)
     console.log('loading faceLandmark68Net...')
     // await faceApi.nets.faceLandmark68Net.loadFromUri(MODEL_URL).catch((err)=>{console.error(err)})
-    faceApi.loadFaceLandmarkModel(MODEL_URL)
+    await faceApi.loadFaceLandmarkModel(MODEL_URL)
 
     console.log('loading faceRecognitionNet...')
     // await faceApi.nets.faceRecognitionNet.loadFromUri(MODEL_URL).catch((err)=>{console.error(err)})
-    faceApi.loadFaceRecognitionModel(MODEL_URL)
+    await faceApi.loadFaceRecognitionModel(MODEL_URL)
 
     console.log('loading faceExpressionNet...')
     // await faceApi.nets.faceExpressionNet.loadFromUri(MODEL_URL).catch((err)=>{console.error(err)})
-    faceApi.loadFaceExpressionModel(MODEL_URL)
+    await faceApi.loadFaceExpressionModel(MODEL_URL)
 
     console.log('loading ageGenderNet...')
     // await faceApi.nets.ageGenderNet.loadFromUri(MODEL_URL).catch((err)=>{console.error(err)})
-    faceApi.loadAgeGenderModel(MODEL_URL)
+    await faceApi.loadAgeGenderModel(MODEL_URL)
 
     setModelsLoaded(true)
     console.log('models loaded')
