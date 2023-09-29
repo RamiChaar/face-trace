@@ -42,17 +42,21 @@ export function App({signOut, user} : WithAuthenticatorProps) {
     loadModels()
   },[])
 
-  const loadModels = ()=>{
-    Promise.all([
-      faceApi.nets.tinyFaceDetector.loadFromUri("/models"),
-      faceApi.nets.faceLandmark68Net.loadFromUri("/models"),
-      faceApi.nets.faceRecognitionNet.loadFromUri("/models"),
-      faceApi.nets.faceExpressionNet.loadFromUri("/models"),
-      faceApi.nets.ageGenderNet.loadFromUri("/models"),
-    ]).then(()=>{
-      setModelsLoaded(true)
-      console.log('models loaded')
-    }).catch((err : string) => {console.error(err)})
+  const loadModels = async ()=>{
+    console.log('loading models')
+
+    console.log('loading tinyFaceDetector...')
+    await faceApi.nets.tinyFaceDetector.loadFromUri("/models")
+    console.log('loading faceLandmark68Net...')
+    await faceApi.nets.faceLandmark68Net.loadFromUri("/models")
+    console.log('loading faceRecognitionNet...')
+    await faceApi.nets.faceRecognitionNet.loadFromUri("/models")
+    console.log('loading faceExpressionNet...')
+    await faceApi.nets.faceExpressionNet.loadFromUri("/models")
+    console.log('loading ageGenderNet...')
+    await faceApi.nets.ageGenderNet.loadFromUri("/models")
+    setModelsLoaded(true)
+    console.log('models loaded')
   }
 
   const startVideo = () => {
