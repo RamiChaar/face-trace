@@ -1,7 +1,6 @@
 .videoStreamDiv {
     display: flex;
     align-items: center;
-    justify-content: center;
     flex-direction: column;
 }
 
@@ -9,10 +8,18 @@
     width: 60vw; 
     height: calc(calc(60vw * 9) / 16);
     background-color: black;
-    margin: 2rem;
+    z-index: 0;
+}
+
+.canvasOverlay {
+    width: 60vw; 
+    height: calc(calc(60vw * 9) / 16);
+    position: absolute;
+    z-index: 1;
 }
 
 .toggleStreamButton {
     border: none;
+    margin: 2rem;
     border-radius: 5px;
 }
