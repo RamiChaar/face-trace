@@ -1,0 +1,21 @@
+
+:root {
+
+    --primary-color: var(--light-primary-color);
+    --secondary-color: var(--light-secondary-color);
+    --accent-color: var(--light-accent-color);
+    --background-color: var(--light-background-color);
+    --text-color: var(--light-text-color);
+
+    --light-primary-color: #5D4C9A;
+    --light-secondary-color: #9D8FCC;
+    --light-accent-color: #ffdac2;
+    --light-background-color: #ffffff;
+    --light-text-color: #000000;
+
+    --dark-primary-color: #7665b3;
+    --dark-secondary-color: #413370;
+    --dark-accent-color: #713e1d;
+    --dark-background-color: #1f1f1f;
+    --dark-text-color: #ffffff;
+}

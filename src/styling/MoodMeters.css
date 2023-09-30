@@ -1,0 +1,103 @@
+@import 'variables.css';
+/* 
+--primary-color
+--secondary-color
+--accent-color
+--background-color
+--text-color
+*/
+
+.metersDiv {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 50vw;
+    height: 10vw;
+    margin-top: 40px;
+    margin-left: 20vw;
+    margin-right: 20vw;
+}
+
+.meter {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    width: 5%;
+    height: 100%;
+    border: 2px solid black;
+}
+
+
+.neutralMeter {
+
+}
+
+.happyMeter {
+
+}
+
+.sadMeter {
+
+}
+
+.angryMeter {
+
+}
+
+.disgustedMeter {
+
+}
+
+.surprisedMeter {
+
+}
+
+.fearfulMeter {
+
+}
+
+
+.level {
+    width: 100%;
+}
+
+.neutralMeterLevel {
+    background-color: #8c8c8c;
+}
+
+.happyMeterLevel {
+    background-color: #10a802;
+}
+
+.sadMeterLevel {
+    background-color: #1055b0;
+}
+
+.angryMeterLevel {
+    background-color: #bf2113;
+}
+
+.disgustedMeterLevel {
+    background-color: #eb8d1a;
+}
+
+.surprisedMeterLevel {
+    background-color: #f0ff21;
+}
+
+.fearfulMeterLevel {
+    background-color: #8c2c00;
+}
+
+
+/*
+
+neutral - grey
+happy - green
+sad - blue
+angry - red
+disgusted - orange
+surprised - yellow
+fearful - grey
+
+*/

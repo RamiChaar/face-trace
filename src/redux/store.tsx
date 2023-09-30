@@ -3,9 +3,9 @@ import videoReducer from './videoSlice'
 
 
 export const store = configureStore({
-    reducer: {
-        videoState: videoReducer,
-    },
+  reducer: {
+    videoState: videoReducer,
+  },
 })
 
 // Infer the `RootState` and `AppDispatch` types from the store itself

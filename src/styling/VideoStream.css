@@ -1,3 +1,12 @@
+@import 'variables.css';
+/* 
+--primary-color
+--secondary-color
+--accent-color
+--background-color
+--text-color
+*/
+
 .videoStreamDiv {
     display: flex;
     align-items: center;
@@ -5,15 +14,15 @@
 }
 
 .videoStream {
-    width: 60vw; 
-    height: calc(calc(60vw * 9) / 16);
+    width: 50vw; 
+    height: calc(calc(50vw * 9) / 16);
     background-color: black;
     z-index: 0;
 }
 
 .canvasOverlay {
-    width: 60vw; 
-    height: calc(calc(60vw * 9) / 16);
+    width: 50vw; 
+    height: calc(calc(50vw * 9) / 16);
     position: absolute;
     z-index: 1;
 }

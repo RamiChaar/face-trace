@@ -1,11 +1,14 @@
 import React, { useState , useRef, useEffect } from 'react';
 import VideoStream from './components/VideoStream';
+import MoodMeters from './components/MoodMeters';
 import Header from './components/Header';
+
 
 //styling
 import './styling/App.css';
 import './styling/VideoStream.css';
 import './styling/Header.css';
+import './styling/MoodMeters.css';
 
 
 //Amplify imports
@@ -24,36 +27,33 @@ Amplify.configure(awsConfig);
 
 export function App() {
 
-  const isPlaying = useSelector((state: RootState) => state.videoState.playing)
   const dispatch = useDispatch()
+  const isPlaying = useSelector((state: RootState) => state.videoState.playing)  
+
   
-
-
   useEffect(()=>{
     loadModels()
   },[])
 
-  const loadModels = async ()=>{
-    const MODEL_URL = `./models`
-    console.log('loading tinyFaceDetector...')
-    await faceApi.nets.tinyFaceDetector.loadFromUri(MODEL_URL).catch((err)=>{console.error(err)})
-    console.log('loading faceExpressionNet...')
-    await faceApi.nets.faceExpressionNet.loadFromUri(MODEL_URL).catch((err)=>{console.error(err)})
-    console.log('loading ageGenderNet...')
-    await faceApi.nets.ageGenderNet.loadFromUri(MODEL_URL).catch((err)=>{console.error(err)})
+  const loadModels = async()=>{
+    await faceApi.nets.tinyFaceDetector.loadFromUri("./models").catch((err)=>{console.error(err)})
+    await faceApi.nets.faceExpressionNet.loadFromUri("./models").catch((err)=>{console.error(err)})
+    await faceApi.nets.ageGenderNet.loadFromUri("./models").catch((err)=>{console.error(err)})
     dispatch(setModelsLoaded())
-    console.log('models loaded')
   }
 
   return (
     <div className='rootDiv'>
       
       <Header></Header>
-      <VideoStream></VideoStream>
-
       {isPlaying ? 
       (<button onClick={() => dispatch(setVideoEnd())} className='toggleStreamButton'>End</button>) : 
       (<button onClick={() => dispatch(setVideoStart())} className='toggleStreamButton'>Start</button>)}
+
+      <VideoStream></VideoStream>
+      <MoodMeters></MoodMeters>
+
+  
     </div>
   )
 }
