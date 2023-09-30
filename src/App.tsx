@@ -6,7 +6,7 @@ import { Amplify } from 'aws-amplify';
 import type { WithAuthenticatorProps } from '@aws-amplify/ui-react';
 import { withAuthenticator } from '@aws-amplify/ui-react';
 import '@aws-amplify/ui-react/styles.css';
-import awsConfig from './utilities/aws-exports';
+import awsConfig from './aws-exports';
 
 //redux imports
 import type { RootState } from './redux/store'
