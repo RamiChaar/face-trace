@@ -28,12 +28,9 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build && npm run replace_models",
+    "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "replace_models": 
-    "node -e \"const fs = require('fs-extra'); fs.copy('./build/models', './build/static/models').then(() => {fs.removeSync('./build/models'); return console.log('success!')}).catch(err => console.error(err))\""
-
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": [
