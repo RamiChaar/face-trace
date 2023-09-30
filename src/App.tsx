@@ -15,6 +15,7 @@ import { decrement, increment } from './redux/exampleSlice'
 
 //faceApi
 import * as faceApi from 'face-api.js';
+import tf from '@tensorflow/tfjs'
 
 Amplify.configure(awsConfig);
 
@@ -49,12 +50,6 @@ export function App({signOut, user} : WithAuthenticatorProps) {
     console.log('loading tinyFaceDetector...')
     await faceApi.nets.tinyFaceDetector.loadFromUri(MODEL_URL).catch((err)=>{console.error(err)})
     
-    console.log('loading faceLandmark68Net...')
-    await faceApi.nets.faceLandmark68Net.loadFromUri(MODEL_URL).catch((err)=>{console.error(err)})
-
-    console.log('loading faceRecognitionNet...')
-    await faceApi.nets.faceRecognitionNet.loadFromUri(MODEL_URL).catch((err)=>{console.error(err)})
-
     console.log('loading faceExpressionNet...')
     await faceApi.nets.faceExpressionNet.loadFromUri(MODEL_URL).catch((err)=>{console.error(err)})
 
@@ -68,7 +63,7 @@ export function App({signOut, user} : WithAuthenticatorProps) {
   const startVideo = () => {
 
     if (!modelsLoaded) {
-      console.warn('cannot start, models not loaded')
+      console.warn('cannot start yet, models not loaded')
       return
     }
 
@@ -79,13 +74,17 @@ export function App({signOut, user} : WithAuthenticatorProps) {
       }
     })
     .then(async(stream : MediaStream) => {
-      if (!videoRef.current) {return}
+      if (!videoRef.current) {
+        return
+      }
       const video : HTMLVideoElement = videoRef.current
       video.srcObject = stream
+
+      setPlaying(true)
       await video.play()
       video.style.zIndex = '0'
+
       setCurrentInterval(setInterval(detect, INTERVAL_TIME))
-      setPlaying(true)
     })
     .catch((err : string) => {console.error(err)})
 
@@ -95,26 +94,29 @@ export function App({signOut, user} : WithAuthenticatorProps) {
 
     if (!videoRef.current) {return}
 
-    const video : HTMLVideoElement= videoRef.current
+    const video : HTMLVideoElement = videoRef.current
 
     let stream : any = video.srcObject 
 
-    await stream.getTracks().forEach( function (track : MediaStreamTrack) {
-      track.stop();
-    })
-
+    video.style.zIndex = '2'
     setPlaying(false)
     clearInterval(currentInterval)
-    video.style.zIndex = '2'
+
+    setTimeout(() => {
+      stream.getTracks().forEach( function (track : MediaStreamTrack) {
+        track.stop()
+      })
+    }, 100)
 
   }
 
   const detect = async () => {
-    if (!videoRef.current || !canvasRef.current) {return}
+    if (!videoRef.current || !canvasRef.current) {
+      return
+    }
 
     const video : HTMLVideoElement = videoRef.current
     const canvas : HTMLCanvasElement = canvasRef.current
-
     const detections : Detection[] = await faceApi.detectAllFaces(video, new faceApi.TinyFaceDetectorOptions())
     .withFaceExpressions()
     .withAgeAndGender()
