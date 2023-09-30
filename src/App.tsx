@@ -18,7 +18,7 @@ import awsConfig from './aws-exports';
 //redux imports
 import type { RootState } from './redux/store'
 import { useSelector, useDispatch } from 'react-redux'
-import { setVideoStart, setVideoEnd, setModelsLoaded } from './redux/videoSlice'
+import { setModelsLoaded } from './redux/videoSlice'
 
 //faceApi
 import * as faceApi from 'face-api.js';
@@ -28,14 +28,12 @@ Amplify.configure(awsConfig);
 export function App() {
 
   const dispatch = useDispatch()
-  const isPlaying = useSelector((state: RootState) => state.videoState.playing)  
-
   
-  useEffect(()=>{
+  useEffect(() => {
     loadModels()
   },[])
 
-  const loadModels = async()=>{
+  const loadModels = async() => {
     await faceApi.nets.tinyFaceDetector.loadFromUri("./models").catch((err)=>{console.error(err)})
     await faceApi.nets.faceExpressionNet.loadFromUri("./models").catch((err)=>{console.error(err)})
     await faceApi.nets.ageGenderNet.loadFromUri("./models").catch((err)=>{console.error(err)})
@@ -46,12 +44,14 @@ export function App() {
     <div className='rootDiv'>
       
       <Header></Header>
-      {isPlaying ? 
-      (<button onClick={() => dispatch(setVideoEnd())} className='toggleStreamButton'>End</button>) : 
-      (<button onClick={() => dispatch(setVideoStart())} className='toggleStreamButton'>Start</button>)}
+      
+      <div className='pageBody'>
+        <div className='liveVideoDiv'>
+          <VideoStream></VideoStream>
+          <MoodMeters></MoodMeters>
+        </div>
+      </div>
 
-      <VideoStream></VideoStream>
-      <MoodMeters></MoodMeters>
 
   
     </div>

@@ -17,7 +17,7 @@ export interface VideoState {
   }
 }
 
-const initialState: VideoState = {
+const initialState : VideoState = {
   playing: false,
   modelsLoaded: false,
   moodRecordCount: 0,
@@ -32,20 +32,20 @@ const initialState: VideoState = {
   }
 }
 
-export const VideoState = createSlice({
+export const VideoSlice = createSlice({
   name: 'videoState',
   initialState,
   reducers: {
-    setVideoStart: (state) => {
+    setVideoStart: (state) : void=> {
       state.playing = true
     },
-    setVideoEnd: (state) => {
+    setVideoEnd: (state)  : void => {
       state.playing = false
     },
-    setModelsLoaded: (state) => {
+    setModelsLoaded: (state)  : void => {
       state.modelsLoaded = true
     },
-    addMoodLevels: (state, action: PayloadAction<number[]>) => {
+    addMoodLevels: (state, action: PayloadAction<number[]>)  : void => {
       let index = state.moodRecordCount % historyAverageCount
       
       state.moodLevels.neutralLevels[index] = action.payload[0]
@@ -58,7 +58,7 @@ export const VideoState = createSlice({
 
       state.moodRecordCount += 1
     },
-    resetMoodLevels: (state) => {
+    resetMoodLevels: (state) : void => {
       for (let i = 0; i < historyAverageCount; i++) {
         state.moodLevels.neutralLevels[i] = 0
         state.moodLevels.happyLevels[i] = 0
@@ -72,6 +72,6 @@ export const VideoState = createSlice({
   },
 })
 
-export const { setVideoStart, setVideoEnd, setModelsLoaded, addMoodLevels, resetMoodLevels } = VideoState.actions
+export const { setVideoStart, setVideoEnd, setModelsLoaded, addMoodLevels, resetMoodLevels } = VideoSlice.actions
 
-export default VideoState.reducer
+export default VideoSlice.reducer

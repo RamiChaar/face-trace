@@ -14,59 +14,51 @@
     width: 50vw;
     height: 10vw;
     margin-top: 40px;
-    margin-left: 20vw;
-    margin-right: 20vw;
+    margin-bottom: 40px;
+    margin-left: 20%;
+    margin-right: 20%;
+}
+
+.meterContainer {
+    width: 5%;
+    height: 100%;
 }
 
 .meter {
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-    width: 5%;
+    width: 100%;
     height: 100%;
-    border: 2px solid black;
-}
-
-
-.neutralMeter {
-
-}
-
-.happyMeter {
+    background-color: var(--custom-color-1);
+    border: 2px solid var(--accent-color);
+    border-radius: 5px;
+    z-index: 1;
 
 }
 
-.sadMeter {
+.icon {
+    width: 100%;
+    height: auto;
+    margin-left: 2px;
+    margin-top: 10px;
+    color: var(--text-color);
 
 }
-
-.angryMeter {
-
-}
-
-.disgustedMeter {
-
-}
-
-.surprisedMeter {
-
-}
-
-.fearfulMeter {
-
-}
-
 
 .level {
     width: 100%;
+    border-radius: 3px;
+    z-index: 0;
+    transition: height .5s ease;
 }
 
 .neutralMeterLevel {
-    background-color: #8c8c8c;
+    background-color: #8b8686;
 }
 
 .happyMeterLevel {
-    background-color: #10a802;
+    background-color: #1a940f;
 }
 
 .sadMeterLevel {
@@ -82,13 +74,12 @@
 }
 
 .surprisedMeterLevel {
-    background-color: #f0ff21;
+    background-color: #FFF524;
 }
 
 .fearfulMeterLevel {
-    background-color: #8c2c00;
+    background-color: #6f2604;
 }
-
 
 /*
 

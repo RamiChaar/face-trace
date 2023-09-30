@@ -16,7 +16,9 @@
 .videoStream {
     width: 50vw; 
     height: calc(calc(50vw * 9) / 16);
-    background-color: black;
+    background-color: var(--background-color);
+    border: 1px solid black;
+    border-radius: 5px;
     z-index: 0;
 }
 
@@ -25,4 +27,23 @@
     height: calc(calc(50vw * 9) / 16);
     position: absolute;
     z-index: 1;
+}
+
+.overlayLabel {
+    position: absolute;
+    width: 50vw; 
+    height: calc(calc(50vw * 9) / 16);
+    background-color: var(--background-color);
+    border: 1px solid black;
+    border-radius: 5px;
+    z-index: 3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.overlayText {
+    color: #E1E4F4;
+    text-align: center;
+    
 }

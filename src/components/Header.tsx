@@ -14,6 +14,7 @@ export function Header() {
     document.documentElement.style.setProperty(`--accent-color`, `var(--${mode}-accent-color)`)
     document.documentElement.style.setProperty(`--background-color`, `var(--${mode}-background-color)`)
     document.documentElement.style.setProperty(`--text-color`, `var(--${mode}-text-color)`)
+    document.documentElement.style.setProperty(`--custom-color-1`, `var(--${mode}-custom-color-1)`)
 
   }, [lightMode])
 
