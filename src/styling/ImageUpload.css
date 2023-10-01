@@ -1,3 +1,7 @@
+.fileInput {
+    width: 180px;
+}
+
 .selectedPhoto {
     max-width: 80vw;
     max-height: 60vh;

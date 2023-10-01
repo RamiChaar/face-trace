@@ -68,8 +68,12 @@ export function VideoStream() {
       return
     }
 
-    setIsLoading(true)
+    if (!navigator || !navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+      setIsError(true)
+      return
+    }
 
+    setIsLoading(true)
 
     navigator.mediaDevices.getUserMedia({
       video: {

@@ -17,6 +17,7 @@
 
 .pageBody {
     min-height: calc(100vh - 160px);
+    max-width: 100%;
     padding-top: 40px;
     padding-bottom: 40px;
     background-color: var(--background-color);
@@ -43,14 +44,28 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    max-width: 95%;
     padding: 40px;
     padding-bottom: 22px;
-    margin-left: 80px;
-    margin-right: 80px;
     background-color: var(--secondary-color);
     border-radius: 5px;
     box-shadow: 25px 27px 51px -17px rgba(0,0,0,0.32);
     -webkit-box-shadow: 25px 27px 51px -17px rgba(0,0,0,0.32);
     -moz-box-shadow: 25px 27px 51px -17px rgba(0,0,0,0.32);
     user-select: none;
+}
+
+@media screen and (max-width: 600px) {
+    .pageBody {
+        min-height: 0;
+
+    }
+
+    .uploadImageDiv {
+        padding: 10px;
+    }
+
+    .liveVideoDiv {
+        padding: 10px;
+    }
 }
