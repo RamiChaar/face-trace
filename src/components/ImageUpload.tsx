@@ -15,6 +15,8 @@ export function ImageUpload () {
   const [wrongFileType, setWrongFileType] = useState<boolean>(false)
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [beganProcessing, setBeganProcessing] = useState<boolean>(false)
+  const [noFaces, setNoFaces] = useState<boolean>(false)
+
 
   const imageRef = useRef<HTMLImageElement>(null)
   const canvasRef = useRef<HTMLCanvasElement>(null)
@@ -30,7 +32,7 @@ export function ImageUpload () {
 
   const setDimensions = () : void => {
     if (!imageRef.current || !canvasRef.current || !loadingRef.current) {
-      return
+      return 
     }
     canvasRef.current.style.height = `${imageRef.current.height}px`
     canvasRef.current.style.width = `${imageRef.current.width}px`
@@ -38,7 +40,24 @@ export function ImageUpload () {
     loadingRef.current.style.width = `${imageRef.current.width}px`
   }
 
-  const runFaceDetection = async ()  => {
+  useEffect(() => {
+    if (!imageRef.current || !canvasRef.current || !loadingRef.current) {
+      return 
+    }
+
+    if (!noFaces) {
+      loadingRef.current.style.height = '0px'
+      loadingRef.current.style.width = '0px'
+      loadingRef.current.style.zIndex = '-1'
+    } else {
+      loadingRef.current.style.height = `${imageRef.current.height}px`
+      loadingRef.current.style.width = `${imageRef.current.width}px`
+      loadingRef.current.style.zIndex = '1'
+    }
+
+  }, [noFaces])
+
+  const runFaceDetection = async () => {
     if (!imageRef.current || !canvasRef.current || !loadingRef.current) {
       return
     }
@@ -91,6 +110,10 @@ export function ImageUpload () {
     faceApi.draw.drawDetections(canvas,resizedDetections)
     loadingRef.current.style.zIndex = '-1'
     setIsLoading(false)
+
+    if (detections.length === 0) {
+      setNoFaces(true)
+    }
 
   }
 
@@ -149,6 +172,7 @@ export function ImageUpload () {
     setImageKey(imageKey + 1)
     setFile(undefined)
     setBeganProcessing(false)
+    setNoFaces(false)
   }
 
   return (
@@ -158,6 +182,7 @@ export function ImageUpload () {
       <canvas ref={canvasRef}className="canvasImageOverlay"/>
       <div ref={loadingRef} className='loadingImageOverlay'>
         {isLoading ? <Ring size={50} color="#E1E4F4"/> : <></>} 
+        {noFaces ? <p className='noFacesLabel'><b>No faces detected</b></p> : <></>}
       </div>
 
       {!wrongFileType ? <></> :

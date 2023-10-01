@@ -81,14 +81,12 @@
     background-color: #6f2604;
 }
 
-/*
-
-neutral - grey
-happy - green
-sad - blue
-angry - red
-disgusted - orange
-surprised - yellow
-fearful - grey
-
-*/
+@media screen and (max-width: 600px) {
+    .metersDiv {
+        height: 12vw;
+        margin-top: 20px;
+        margin-bottom: 30px;
+        margin-left: 10%;
+        margin-right: 10%;
+    }
+}

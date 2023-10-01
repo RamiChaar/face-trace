@@ -53,3 +53,10 @@
     user-select: none;
     cursor: pointer;
 }
+
+@media screen and (max-width: 600px) {
+    .videoStream, .canvasOverlay, .overlayLabel {
+        width: 50vw; 
+        height: calc(calc(50vw * 4) / 3);
+    }
+}
