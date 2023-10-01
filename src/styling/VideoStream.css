@@ -11,15 +11,18 @@
     display: flex;
     align-items: center;
     flex-direction: column;
+    user-select: none;
 }
 
 .videoStream {
     width: 50vw; 
     height: calc(calc(50vw * 9) / 16);
     background-color: var(--background-color);
-    border: 1px solid black;
+    border: 1px solid rgb(54, 54, 54);
     border-radius: 5px;
     z-index: 0;
+    user-select: none;
+    cursor: pointer;
 }
 
 .canvasOverlay {
@@ -27,6 +30,7 @@
     height: calc(calc(50vw * 9) / 16);
     position: absolute;
     z-index: 1;
+    user-select: none;
 }
 
 .overlayLabel {
@@ -40,10 +44,12 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    user-select: none;
 }
 
 .overlayText {
     color: #E1E4F4;
     text-align: center;
-    
+    user-select: none;
+    cursor: pointer;
 }

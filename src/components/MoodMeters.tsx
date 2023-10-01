@@ -38,6 +38,7 @@ export function MoodMeters() {
 
     dispatch(resetMoodLevels())
     resetHeights()
+    setDominantEmotion('none')
 
   }, [isPlaying])
 

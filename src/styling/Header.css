@@ -10,5 +10,49 @@
 .headerDiv {
     height: 80px;
     width: 100%;
+    background-color: var(--primary-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+}
+
+.toggleDiv {
+    width: 140px;
+    height: 40px;
+    border-radius: 20px;
+    padding: 5px;
     background-color: var(--secondary-color);
+    display: flex;
+    align-items: center;
+    user-select: none;
+
+}
+
+.toggle {
+    width: 70px;
+    height: 40px;
+    border-radius: 15px;
+    background-color: var(--accent-color);
+    user-select: none;
+    transition: margin .4s ease;
+
+}
+
+.videoIcon {
+    width: 30px;
+    height: auto;
+    position: absolute;
+    margin-left: 20px;
+    color: var(--text-color);
+    user-select: none;
+}
+
+.imageIcon {
+    width: 30px;
+    height: auto;
+    position: absolute;
+    margin-left: 90px;
+    color: var(--text-color);
+    user-select: none;
 }

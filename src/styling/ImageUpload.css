@@ -1,0 +1,33 @@
+.selectedPhoto {
+    max-width: 80vw;
+    max-height: 60vh;
+    margin: 20px
+}
+
+.canvasImageOverlay {
+    position: absolute;
+    height: 0;
+    width: 0;
+    z-index: -1;
+}
+
+.loadingImageOverlay {
+    position:absolute; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0,0,0,0.60);
+    z-index: -1;
+}
+
+.imageActionSelection {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: row;
+    margin-right: 40px;
+}
+
+.deleteFile {
+    margin-left: 5px;
+}   

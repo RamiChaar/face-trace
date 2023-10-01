@@ -1,34 +1,48 @@
-import React, { useState , useRef, useEffect } from 'react';
+import React, { useState , useRef, useEffect } from 'react'
+
+//redux
+import type { RootState } from '../redux/store'
+import { useSelector , useDispatch} from 'react-redux'
+import { setToVideo, setToImage } from '../redux/appStateSlice'
+
+//icons
+import { ImVideoCamera as VideoIcon, ImImage as ImageIcon} from "react-icons/im"
 
 
 export function Header() {
 
-  const [lightMode, setLightMode] = useState<boolean>(true)
+  const dispatch = useDispatch()
 
-  useEffect(() => {
+  const currentPage = useSelector((state: RootState) => state.appState.page)
 
-    let mode = lightMode ? 'light' : 'dark'
+  const toggleRef = useRef<HTMLDivElement>(null)
+  
 
-    document.documentElement.style.setProperty(`--primary-color`, `var(--${mode}-primary-color)`)
-    document.documentElement.style.setProperty(`--secondary-color`, `var(--${mode}-secondary-color)`)
-    document.documentElement.style.setProperty(`--accent-color`, `var(--${mode}-accent-color)`)
-    document.documentElement.style.setProperty(`--background-color`, `var(--${mode}-background-color)`)
-    document.documentElement.style.setProperty(`--text-color`, `var(--${mode}-text-color)`)
-    document.documentElement.style.setProperty(`--custom-color-1`, `var(--${mode}-custom-color-1)`)
-
-  }, [lightMode])
-
-  const changeMode = () => {
-    if (lightMode) {
-      setLightMode(false)
-    } else {
-      setLightMode(true)
+  const selectVideo = () : void => {
+    if (!toggleRef.current || currentPage == 'video') {
+      return
     }
+
+    dispatch(setToVideo())
+    toggleRef.current.style.marginLeft = '0px'
+  }
+
+  const selectImage = () : void => {
+    if (!toggleRef.current || currentPage == 'image') {
+      return
+    }
+
+    dispatch(setToImage())
+    toggleRef.current.style.marginLeft = '70px'
   }
 
   return (
     <div className='headerDiv'>
-      <button onClick={changeMode}>changeMode</button>
+      <div className='toggleDiv'>
+        <div ref={toggleRef} className='toggle'></div>
+        <VideoIcon className="videoIcon" onClick={selectVideo}/>
+        <ImageIcon className="imageIcon" onClick={selectImage}/>
+      </div>
     </div>
   )
 }

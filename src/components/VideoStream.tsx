@@ -5,6 +5,7 @@ import type { RootState } from '../redux/store'
 import { useSelector, useDispatch } from 'react-redux'
 import { setVideoStart, setVideoEnd, addMoodLevels } from '../redux/videoSlice'
 
+
 //faceApi
 import * as faceApi from 'face-api.js';
 
@@ -18,6 +19,7 @@ export function VideoStream() {
   const dispatch = useDispatch()
   const isPlaying = useSelector((state: RootState) => state.videoState.playing)
   const modelsLoaded = useSelector((state: RootState) => state.videoState.modelsLoaded)
+  const currentPage = useSelector((state: RootState) => state.appState.page)
 
   const [currentInterval, setCurrentInterval] = useState<NodeJS.Timer>()
   const [isLoading, setIsLoading] = useState<boolean>(false)
@@ -31,18 +33,20 @@ export function VideoStream() {
   const INTERVAL_TIME : number = 200
 
   useEffect(() => {
+    if (currentPage === "image") {
+      stopVideo()
+    }
+  }, [currentPage])
+
+  useEffect(() => {
     if (!overlayRef.current) {
       return
     }
 
-    if (isLoading) {
-      //loading animation
-
-    } else {
+    if (!isLoading && !isError) {
       overlayRef.current.style.zIndex = '-1'
-      //remove loading animation
     }
-
+    
   }, [isLoading])
 
   useEffect(() => {
@@ -56,20 +60,6 @@ export function VideoStream() {
     }
 
   }, [isPlaying])
-
-  useEffect(() => {
-    if (!overlayRef.current) {
-      return
-    }
-
-    if (isError) {
-      //add error message
-    } else {
-      //remove error message
-    }
-
-  }, [isError])
-
 
   const startVideo = () : void => {
 
@@ -112,7 +102,7 @@ export function VideoStream() {
   }
   
   const stopVideo = async () => {
-  
+
     if (!videoRef.current || !videoRef.current.srcObject) {return}
 
     const video : HTMLVideoElement = videoRef.current
@@ -160,16 +150,20 @@ export function VideoStream() {
     }
 
     if (detections && detections.length > 0 && detections[0].expressions) {
+      let levelsArr : number[] = [0, 0, 0, 0, 0, 0, 0]
+      for (let i : number = 0; i < detections.length; i ++){
+        levelsArr[0] += detections[i].expressions.neutral
+        levelsArr[1] += detections[i].expressions.happy
+        levelsArr[2] += detections[i].expressions.sad
+        levelsArr[3] += detections[i].expressions.angry
+        levelsArr[4] += detections[i].expressions.disgusted
+        levelsArr[5] += detections[i].expressions.surprised
+        levelsArr[6] += detections[i].expressions.fearful
+      }
 
-      let levelsArr : number[] = [
-        detections[0].expressions.neutral,
-        detections[0].expressions.happy,
-        detections[0].expressions.sad,
-        detections[0].expressions.angry,
-        detections[0].expressions.disgusted,
-        detections[0].expressions.surprised,
-        detections[0].expressions.fearful
-      ]
+      for (let i : number = 0; i < 7; i++) {
+        levelsArr[i] /= detections.length
+      }
 
       dispatch(addMoodLevels(levelsArr))
     } else {

@@ -1,10 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit'
 import videoReducer from './videoSlice'
+import appStateReducer from './appStateSlice'
+
 
 
 export const store = configureStore({
   reducer: {
     videoState: videoReducer,
+    appState: appStateReducer
   },
 })
 
