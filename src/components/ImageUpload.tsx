@@ -1,12 +1,12 @@
-import React, { ChangeEvent, useState , useRef, useEffect } from 'react'
+import { ChangeEvent, useState , useRef, useEffect } from 'react'
 
 //faceApi
-import * as faceApi from 'face-api.js';
+import * as faceApi from 'face-api.js'
 
 //animation
 import { Ring } from '@uiball/loaders'
 
-type Detection = faceApi.WithAge<faceApi.WithGender<faceApi.WithFaceExpressions<{ detection: faceApi.FaceDetection; }>>>;
+type Detection = faceApi.WithAge<faceApi.WithGender<faceApi.WithFaceExpressions<{ detection: faceApi.FaceDetection }>>>
 
 export function ImageUpload () {
 
@@ -23,10 +23,10 @@ export function ImageUpload () {
   const loadingRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    window.addEventListener('resize', setDimensions);
+    window.addEventListener('resize', setDimensions)
     
     return () => {
-      window.removeEventListener('resize', setDimensions);
+      window.removeEventListener('resize', setDimensions)
     };
   },[])
 
@@ -69,7 +69,7 @@ export function ImageUpload () {
     .withFaceExpressions()
     .withAgeAndGender()
 
-    const dimensions = {width: image.width ,height: image.height}
+    const dimensions = {width: image.width * 2 ,height: image.height * 2}
     faceApi.matchDimensions(canvas, dimensions)
     const resizedDetections : Detection[] = faceApi.resizeResults(detections, dimensions)
 
@@ -80,26 +80,47 @@ export function ImageUpload () {
         `${resizedDetections[i].gender} (${resizedDetections[i].genderProbability.toFixed(2)})`
       ]
 
+      const expressionsToAdd : string[] = []
+
       if (detections[i].expressions.neutral > .1) {
-        text.push(`neutral (${detections[i].expressions.neutral.toFixed(2)})`)
+        expressionsToAdd.push(`neutral (${detections[i].expressions.neutral.toFixed(2)})`)
       }
       if (detections[i].expressions.happy > .1) {
-        text.push(`happy (${detections[i].expressions.happy.toFixed(2)})`)
+        expressionsToAdd.push(`happy (${detections[i].expressions.happy.toFixed(2)})`)
       }
       if (detections[i].expressions.sad > .1) {
-        text.push(`sad (${detections[i].expressions.sad.toFixed(2)})`)
+        expressionsToAdd.push(`sad (${detections[i].expressions.sad.toFixed(2)})`)
       }
       if (detections[i].expressions.angry > .1) {
-        text.push(`angry (${detections[i].expressions.angry.toFixed(2)})`)
+        expressionsToAdd.push(`angry (${detections[i].expressions.angry.toFixed(2)})`)
       }
       if (detections[i].expressions.disgusted > .1) {
-        text.push(`disgusted (${detections[i].expressions.disgusted.toFixed(2)})`)
+        expressionsToAdd.push(`disgusted (${detections[i].expressions.disgusted.toFixed(2)})`)
       }
       if (detections[i].expressions.surprised > .1) {
-        text.push(`surprised (${detections[i].expressions.surprised.toFixed(2)})`)
+        expressionsToAdd.push(`surprised (${detections[i].expressions.surprised.toFixed(2)})`)
       }
       if (detections[i].expressions.fearful > .1) {
-        text.push(`fearful (${detections[i].expressions.fearful.toFixed(2)})`)
+        expressionsToAdd.push(`fearful (${detections[i].expressions.fearful.toFixed(2)})`)
+      }
+
+      const comparator = (a: string, b: string) : number => {
+        const matchA = a.match(/\(([^)]+)\)/)
+        const matchB = b.match(/\(([^)]+)\)/)
+        if (matchA && matchB) {
+          const valueA = parseFloat(matchA[1])
+          const valueB = parseFloat(matchB[1])
+          if (!isNaN(valueA) && !isNaN(valueB)) {
+            return valueB - valueA
+          }
+        }
+        return 0
+      }
+
+      expressionsToAdd.sort(comparator)
+
+      for (let j = 0; j < expressionsToAdd.length; j++) {
+        text.push(expressionsToAdd[j])
       }
 
       const anchor : faceApi.IPoint = { x: resizedDetections[i].detection.box.x, y: resizedDetections[i].detection.box.y  + resizedDetections[i].detection.box.height}

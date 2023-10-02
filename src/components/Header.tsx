@@ -1,4 +1,4 @@
-import React, { useState , useRef, useEffect } from 'react'
+import {  useRef } from 'react'
 
 //redux
 import type { RootState } from '../redux/store'
@@ -19,7 +19,7 @@ export function Header() {
   
 
   const selectVideo = () : void => {
-    if (!toggleRef.current || currentPage == 'video') {
+    if (!toggleRef.current || currentPage === 'video') {
       return
     }
 
@@ -28,7 +28,7 @@ export function Header() {
   }
 
   const selectImage = () : void => {
-    if (!toggleRef.current || currentPage == 'image') {
+    if (!toggleRef.current || currentPage === 'image') {
       return
     }
 

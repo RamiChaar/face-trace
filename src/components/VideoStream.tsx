@@ -1,4 +1,4 @@
-import React, { useState , useRef, useEffect } from 'react';
+import { useState , useRef, useEffect } from 'react'
 
 //redux imports
 import type { RootState } from '../redux/store'
@@ -7,12 +7,12 @@ import { setVideoStart, setVideoEnd, addMoodLevels } from '../redux/videoSlice'
 
 
 //faceApi
-import * as faceApi from 'face-api.js';
+import * as faceApi from 'face-api.js'
 
 //animation
 import { Ring } from '@uiball/loaders'
 
-type Detection = faceApi.WithAge<faceApi.WithGender<faceApi.WithFaceExpressions<{ detection: faceApi.FaceDetection; }>>>;
+type Detection = faceApi.WithAge<faceApi.WithGender<faceApi.WithFaceExpressions<{ detection: faceApi.FaceDetection }>>>
 
 export function VideoStream() {
 

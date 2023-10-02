@@ -1,4 +1,4 @@
-import React, { useState , useRef, useEffect } from 'react';
+import { useEffect } from 'react';
 import VideoStream from './components/VideoStream';
 import MoodMeters from './components/MoodMeters';
 import Header from './components/Header';

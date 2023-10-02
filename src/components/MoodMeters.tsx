@@ -1,4 +1,4 @@
-import React, { useState , useRef, useEffect } from 'react';
+import { useState , useRef, useEffect } from 'react'
 
 //redux imports
 import type { RootState } from '../redux/store'
@@ -10,7 +10,7 @@ import {
   ImNeutral as NeutralIcon, ImGrin as HappyIcon,
   ImSad as SadIcon, ImAngry as AngryIcon, ImConfused as DisgustedIcon, 
    ImShocked as SurprisedIcon, ImBaffled as FearfulIcon 
-} from "react-icons/im";
+} from "react-icons/im"
 
 type MoodInterface = { neutralLevels: number[]; happyLevels: number[]; sadLevels: number[]; angryLevels: number[]; disgustedLevels: number[]; surprisedLevels: number[]; fearfulLevels: number[]; }
 
