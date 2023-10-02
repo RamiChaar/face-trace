@@ -4,6 +4,8 @@ A web app build on react with typescript that uses the face-api.js API to run re
 
 ## Captures
 
+<img width="1129" alt="Screenshot 2023-10-01 at 20 38 22" src="https://github.com/RamiChaar/face-trace/assets/99862145/eec505f2-3b1f-4d62-ac0a-653977684d2e">
+
 ## Features
 
 #### Realtime face & emotion tracking with webcam
