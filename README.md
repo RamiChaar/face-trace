@@ -1,46 +1,32 @@
-# Getting Started with Create React App
+# Face Trace
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A web app build on react with typescript that uses the face-api.js API to run realtime face detection and processing.
 
-## Available Scripts
+## Captures
 
-In the project directory, you can run:
+## Features
 
-### `npm start`
+#### Realtime face & emotion tracking with webcam
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- Estimates age and gender of each face within view
+- Displays the average presence of each detected emotion
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+#### Image upload detection
 
-### `npm test`
+- Upload any image file to process with the tinyfacedetection model API (face-api.js)
+- Each detected face is outlined and information regarding each one displayed (age, gender, emotions)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Working Site
 
-### `npm run build`
+https://main.d281b90asnm6xn.amplifyapp.com
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Tools and framework used
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- React (ts)
+- Node
+- Visual Studio Code
+- AWS Amplify Web Hosting
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## API References / Credit
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+- face-api.js (https://github.com/justadudewhohacks/face-api.js)
